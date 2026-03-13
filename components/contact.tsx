@@ -1,213 +1,191 @@
-"use client"
+"use client";
 
-import React from "react"
+import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
-import { siteConfig } from "@/lib/data"
-import { Mail, Calendar, Linkedin, Github, Youtube, Instagram, ArrowRight, Send } from "lucide-react"
-import Link from "next/link"
 
-export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+export default function CourseContact() {
+  const [track, setTrack] = useState("");
+  const [goal, setGoal] = useState("");
+  const [time, setTime] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
-  }
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [errors, setErrors] = useState<{[key:string]:string}>({});
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const router = useRouter()
+
+  // Spotlight effect
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      document.documentElement.style.setProperty(
+        "--x",
+        `${e.clientX}px`
+      );
+      document.documentElement.style.setProperty(
+        "--y",
+        `${e.clientY}px`
+      );
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
+
+  const validate = () => {
+    const e: any = {};
+    if (!track) e.track = "Select your path";
+    if (!goal) e.goal = "Select your goal";
+    if (!time) e.time = "Choose start time";
+    if (!name.trim()) e.name = "Enter your name";
+    if (!/^[6-9]\d{9}$/.test(phone)) e.phone = "Enter valid 10-digit phone";
+    if (email && !/^\S+@\S+\.\S+$/.test(email)) e.email = "Invalid email";
+
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const sendForm = async () => {
+    if (!validate()) return;
+    try {
+      setLoading(true);
+
+      // await emailjs.send(
+      //   "YOUR_SERVICE_ID",
+      //   "YOUR_TEMPLATE_ID",
+      //   { name, phone, email, track, goal, time },
+      //   "YOUR_PUBLIC_KEY"
+      // );
+
+      setSuccess(true);
+      setLoading(false);
+      router.push("/thank-you")
+
+    } catch {
+      alert("Something went wrong.");
+      setLoading(false);
+    }
+  };
 
   return (
-    <section id="contact" className="py-28 bg-card">
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-16">
-            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-4">
-              Contact
-            </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-8">
-              Let&apos;s work together
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Have a project in mind, need mentorship, or want to invite me to speak? 
-              I&apos;d love to hear from you.
-            </p>
+    <section className="contact-dots relative min-h-screen bg-black text-white px-8 md:px-16 py-32 flex flex-col lg:flex-row gap-24 overflow-hidden" id="contact">
+
+      {/* Cursor spotlight */}
+      <div className="pointer-events-none fixed inset-0"
+        style={{
+          background:
+            "radial-gradient(600px at var(--x) var(--y), rgba(255,255,255,0.06), transparent 60%)",
+        }}
+      />
+
+      {/* Floating particles */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1.5 h-1.5 bg-white/20 rounded-full"
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ repeat: Infinity, duration: 6 + i }}
+          style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }}
+        />
+      ))}
+
+      {/* LEFT SIDE */}
+      <div className="flex-1">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-[90px] md:text-[110px] leading-[0.9] font-semibold tracking-tight"
+        >
+          Let’s shape <br /> your tech <br /> future.
+        </motion.h2>
+
+        <p className="text-white/40 mt-12 max-w-sm">
+          You don’t need another course. You need the right direction.
+        </p>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="flex-1 max-w-2xl">
+
+        {/* TRACK */}
+        <p className="text-lg mb-5 text-white/70">Which path interests you?</p>
+        <div className="flex flex-wrap gap-3 mb-6">
+          {["MERN Stack","Python Full Stack","AI & Data Science","Career Mentorship"].map(t => (
+            <motion.button whileHover={{ scale: 1.05 }} key={t}
+              onClick={()=>setTrack(t)}
+              className={`px-5 py-2.5 rounded-full border text-sm transition
+              ${track===t?"bg-white text-black":"bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
+              {t}
+            </motion.button>
+          ))}
+        </div>
+        {errors.track && <p className="text-red-400 text-sm mb-6">{errors.track}</p>}
+
+        {/* GOAL */}
+        <p className="text-lg mb-5 text-white/70">What is your goal?</p>
+        <div className="flex gap-3 flex-wrap mb-6">
+          {["Get a job","Switch career","Freelancing","Build startup"].map(g => (
+            <motion.button whileHover={{ scale: 1.05 }} key={g}
+              onClick={()=>setGoal(g)}
+              className={`px-5 py-2.5 rounded-full border text-sm transition
+              ${goal===g?"bg-white text-black":"bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
+              {g}
+            </motion.button>
+          ))}
+        </div>
+        {errors.goal && <p className="text-red-400 text-sm mb-6">{errors.goal}</p>}
+
+        {/* TIME */}
+        <p className="text-lg mb-5 text-white/70">When do you want to start?</p>
+        <div className="flex gap-3 mb-8">
+          {["Immediately","1 Month","Exploring"].map(t => (
+            <motion.button whileHover={{ scale: 1.05 }} key={t}
+              onClick={()=>setTime(t)}
+              className={`px-5 py-2.5 rounded-full border text-sm transition
+              ${time===t?"bg-white text-black":"bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
+              {t}
+            </motion.button>
+          ))}
+        </div>
+        {errors.time && <p className="text-red-400 text-sm mb-8">{errors.time}</p>}
+
+        {/* INPUTS */}
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-10 mb-10">
+          <div>
+            <input value={name} onChange={(e)=>setName(e.target.value)}
+              placeholder="Your Name"
+              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none"/>
+            {errors.name && <p className="text-red-400 text-xs mt-2">{errors.name}</p>}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Form */}
-            <Card className="border border-border/50 bg-background/50 backdrop-blur-sm">
-              <CardContent className="p-7">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-foreground mb-2.5"
-                    >
-                      Name
-                    </label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      required
-                      className="bg-card/50 border-border/50 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50 h-12"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-foreground mb-2.5"
-                    >
-                      Email
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      required
-                      className="bg-card/50 border-border/50 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50 h-12"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-foreground mb-2.5"
-                    >
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell me about your project or inquiry..."
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      required
-                      className="bg-card/50 border-border/50 text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12">
-                    Send Message
-                    <Send size={16} className="ml-2" />
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+          <div>
+            <input value={phone} onChange={(e)=>setPhone(e.target.value)}
+              placeholder="Phone Number"
+              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none"/>
+            {errors.phone && <p className="text-red-400 text-xs mt-2">{errors.phone}</p>}
+          </div>
 
-            {/* Contact Info */}
-            <div className="space-y-5">
-              {/* Book a Call CTA */}
-              <Card className="border-0 bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5">
-                <CardContent className="p-7">
-                  <div className="flex items-start gap-5">
-                    <div className="p-3 rounded-xl bg-primary/20 text-primary">
-                      <Calendar size={24} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-2">
-                        Prefer a call?
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-5">
-                        Book a free 15-minute discovery call to discuss your goals.
-                      </p>
-                      <Button
-                        asChild
-                        className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                      >
-                        <Link href={siteConfig.calendarLink} target="_blank">
-                          Book via Calendar
-                          <ArrowRight size={16} className="ml-2" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Email */}
-              <Card className="border border-border/50 bg-background/50 backdrop-blur-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-primary/10 text-primary">
-                      <Mail size={20} />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Email</p>
-                      <Link
-                        href={`mailto:${siteConfig.email}`}
-                        className="text-foreground font-medium hover:text-primary transition-colors"
-                      >
-                        {siteConfig.email}
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Social Links */}
-              <Card className="border border-border/50 bg-background/50 backdrop-blur-sm">
-                <CardContent className="p-6">
-                  <p className="text-sm text-muted-foreground mb-5">
-                    Connect with me
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <Link
-                      href={siteConfig.social.linkedin}
-                      target="_blank"
-                      className="p-3.5 rounded-xl border border-border/50 bg-card/50 hover:bg-primary hover:border-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin size={20} />
-                    </Link>
-                    <Link
-                      href={siteConfig.social.github}
-                      target="_blank"
-                      className="p-3.5 rounded-xl border border-border/50 bg-card/50 hover:bg-primary hover:border-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300"
-                      aria-label="GitHub"
-                    >
-                      <Github size={20} />
-                    </Link>
-                    <Link
-                      href={siteConfig.social.youtube}
-                      target="_blank"
-                      className="p-3.5 rounded-xl border border-border/50 bg-card/50 hover:bg-primary hover:border-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300"
-                      aria-label="YouTube"
-                    >
-                      <Youtube size={20} />
-                    </Link>
-                    <Link
-                      href={siteConfig.social.instagram}
-                      target="_blank"
-                      className="p-3.5 rounded-xl border border-border/50 bg-card/50 hover:bg-primary hover:border-primary text-muted-foreground hover:text-primary-foreground transition-all duration-300"
-                      aria-label="Instagram"
-                    >
-                      <Instagram size={20} />
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+          <div className="col-span-2">
+            <input value={email} onChange={(e)=>setEmail(e.target.value)}
+              placeholder="Email (optional)"
+              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none"/>
+            {errors.email && <p className="text-red-400 text-xs mt-2">{errors.email}</p>}
           </div>
         </div>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          disabled={loading}
+          onClick={sendForm}
+          className="nav-talk-btn px-10 py-3 rounded-full opacity-50"
+        >
+          {loading ? "Processing..." : success ? "Plan Sent ✓" : "Start My Learning Plan"}
+        </motion.button>
       </div>
     </section>
-  )
+  );
 }

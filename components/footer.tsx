@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { siteConfig, navLinks } from "@/lib/data"
-import { Linkedin, Github, Youtube, Instagram } from "lucide-react"
+import { siteConfig } from "@/lib/data"
+import { Linkedin, Github, Youtube, Instagram, Calendar } from "lucide-react"
 
 export function Footer() {
   return (
@@ -8,6 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 mb-10">
+
             {/* Logo & Description */}
             <div>
               <Link
@@ -17,21 +18,27 @@ export function Footer() {
                 {siteConfig.name}
               </Link>
               <p className="text-sm text-muted-foreground mt-3 max-w-xs leading-relaxed">
-                Mentoring developers, speaking about AI, and writing tech stories.
+                Engineering mentor, AI speaker, and builder of real-world tech solutions.
               </p>
             </div>
 
-            {/* Quick Links */}
+            {/* Quick Links (Updated) */}
             <div className="flex flex-wrap gap-x-8 gap-y-3">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                About
+              </Link>
+              <Link href="/services" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                Services
+              </Link>
+              <Link href="/speaking" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                Speaking
+              </Link>
+              <Link href="/insights" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                Insights
+              </Link>
+              <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                Contact
+              </Link>
             </div>
           </div>
 
@@ -41,8 +48,18 @@ export function Footer() {
               © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
             </p>
 
-            {/* Social Links */}
+            {/* Social + Booking */}
             <div className="flex items-center gap-3">
+
+              {/* Cal.com Booking */}
+              <Link
+                href="/book"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition"
+              >
+                Book a Call
+              </Link>
+
+
               <Link
                 href={siteConfig.social.linkedin}
                 target="_blank"
@@ -67,14 +84,7 @@ export function Footer() {
               >
                 <Youtube size={18} />
               </Link>
-              <Link
-                href={siteConfig.social.instagram}
-                target="_blank"
-                className="p-2.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-card transition-all duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram size={18} />
-              </Link>
+            
             </div>
           </div>
         </div>

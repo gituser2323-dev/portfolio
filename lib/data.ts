@@ -5,12 +5,11 @@ export const siteConfig = {
   location: "India",
   social: {
     linkedin: "https://www.linkedin.com/in/pratik-sabale-4b96b7171/",
-    github: "https://github.com/pratiksabale",
-    youtube: "https://youtube.com/@pratiksabale",
-    instagram: "https://instagram.com/_pratiksabale",
-    twitter: "https://twitter.com/pratiksabale",
+    github: "https://www.linkedin.com/in/pratik-sabale-4b96b7171/",
+    youtube: "",
+    twitter: "",
+  
   },
-  calendarLink: "https://cal.com/pratiksabale",
 }
 
 export const highlights = [

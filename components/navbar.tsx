@@ -1,99 +1,163 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import gsap from "gsap"
 import { Menu, X } from "lucide-react"
-import { siteConfig, navLinks } from "@/lib/data"
-import { cn } from "@/lib/utils"
+import { siteConfig } from "@/lib/data"
+import { EnquiryModal } from "@/app/EnquiryModal"
+
+const MENU_ITEMS = [
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Speaking", href: "#speaking" },
+  { label: "Insights", href: "#insights" },
+  { label: "Contact", href: "#contact" },
+]
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [openEnquiry, setOpenEnquiry] = useState(false)
+
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const itemsRef = useRef<HTMLAnchorElement[]>([])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+    if (!overlayRef.current) return
+
+    if (open) {
+      gsap.set(overlayRef.current, { display: "block" })
+
+      gsap.fromTo(
+        overlayRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.35, ease: "power2.out" }
+      )
+
+      gsap.fromTo(
+        itemsRef.current,
+        { y: 60, opacity: 0, skewY: 3 },
+        {
+          y: 0,
+          opacity: 1,
+          skewY: 0,
+          stagger: 0.12,
+          duration: 0.85,
+          ease: "power4.out",
+          delay: 0.15,
+        }
+      )
+    } else {
+      gsap.to(itemsRef.current, {
+        y: 30,
+        opacity: 0,
+        skewY: -2,
+        stagger: 0.06,
+        duration: 0.35,
+        ease: "power3.in",
+      })
+
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.3,
+        delay: 0.15,
+        ease: "power2.in",
+        onComplete: () => {
+          gsap.set(overlayRef.current, { display: "none" })
+        },
+      })
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [open])
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
-          : "bg-transparent"
-      )}
-    >
-      <nav className="container mx-auto px-6 lg:px-8 py-5">
-        <div className="flex items-center justify-between">
+    <>
+      {/* ================= TOP BAR ================= */}
+<header className="navbar-same-as-hero fixed top-0 left-0 right-0 z-50 pt-5">
+        <div className="container mx-auto px-6 lg:px-8 py-5 flex items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-colors duration-300"
-          >
+          <Link href="/" className="text-lg font-semibold text-white">
             {siteConfig.name}
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="relative text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
-              </Link>
-            ))}
-          </div>
+          {/* Actions */}
+          <div className="flex items-center gap-4">
+            {/* LET’S TALK — opens modal */}
+            <button
+              onClick={() => setOpenEnquiry(true)}
+              className="nav-talk-btn"
+            >
+              let’s talk
+            </button>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground px-6">
-              <Link href={siteConfig.calendarLink} target="_blank">
-                Book a Session
-              </Link>
-            </Button>
+            {/* Hamburger */}
+            <button
+              onClick={() => setOpen(true)}
+              className="text-white/80 hover:text-white transition"
+              aria-label="Open menu"
+            >
+              <Menu size={30} />
+            </button>
           </div>
+        </div>
+      </header>
 
-          {/* Mobile Menu Button */}
+      {/* ================= ENQUIRY MODAL ================= */}
+      <EnquiryModal
+        open={openEnquiry}
+        onClose={() => setOpenEnquiry(false)}
+      />
+
+      {/* ================= FULLSCREEN MENU ================= */}
+      <div
+        ref={overlayRef}
+        className="fixed inset-0 z-[999] hidden bg-black"
+      >
+        {/* Top right actions */}
+        <div className="absolute top-6 right-6 flex items-center gap-4">
+          {/* Let’s talk inside menu */}
           <button
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            onClick={() => {
+              setOpen(false)
+              setOpenEnquiry(true)
+            }}
+            className="nav-talk-btn-engaged"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <span className="cta-text">let’s talk</span>
+            <span className="cta-arrow">↗</span>
+          </button>
+
+          <button
+            onClick={() => setOpen(false)}
+            className="text-white/70 hover:text-white transition"
+            aria-label="Close menu"
+          >
+            <X size={28} />
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-6 pb-6 border-t border-border/50 pt-6 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="flex flex-col gap-5">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
+        {/* Menu items */}
+        <div className="h-full flex items-center">
+          <nav className="container mx-auto px-6 lg:px-8">
+            <ul className="space-y-12">
+              {MENU_ITEMS.map((item, i) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    ref={(el) => {
+                      if (el) itemsRef.current[i] = el
+                    }}
+                    onClick={() => setOpen(false)}
+                    className="menu-item-ultra"
+                  >
+                    <span className="menu-arrow-left">→</span>
+                    <span className="menu-label">{item.label}</span>
+                  </Link>
+                </li>
               ))}
-              <Button asChild className="mt-4 w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                <Link href={siteConfig.calendarLink} target="_blank">
-                  Book a Session
-                </Link>
-              </Button>
-            </div>
-          </div>
-        )}
-      </nav>
-    </header>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </>
   )
 }

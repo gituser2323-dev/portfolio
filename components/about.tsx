@@ -1,65 +1,62 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Code, Terminal, Layers, Bot } from "lucide-react"
-import { highlights } from "@/lib/data"
+"use client"
 
-const iconMap = {
-  code: Code,
-  terminal: Terminal,
-  layers: Layers,
-  bot: Bot,
-}
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function About() {
-  return (
-    <section id="about" className="py-28 bg-secondary/30">
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-16">
-            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-4">
-              About
-            </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-8">
-              What I Do
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              I&apos;m Pratik Sabale, a passionate technologist based in India with experience 
-              in software development and education. My mission is to make 
-              technology education accessible, practical, and career-transforming.
-            </p>
-          </div>
+  const containerRef = useRef<HTMLDivElement>(null)
+  const wordRefs = useRef<HTMLSpanElement[]>([])
 
-          {/* Highlight Cards - 4 cards */}
-          <div className="grid sm:grid-cols-2 gap-5">
-            {highlights.map((highlight, index) => {
-              const Icon = iconMap[highlight.icon as keyof typeof iconMap]
-              return (
-                <Card
-                  key={index}
-                  className="group border border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:border-primary/30 transition-all duration-500"
-                >
-                  <CardContent className="p-7">
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                        <Icon size={24} />
-                      </div>
-                      <Badge className="text-xs bg-card border border-border/50 text-muted-foreground hover:bg-card">
-                        {highlight.badge}
-                      </Badge>
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
-                      {highlight.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {highlight.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
-        </div>
+  const text =
+ "Learn the skills modern careers demand — guided by experience, powered by innovation.";
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      wordRefs.current.forEach((word, i) => {
+        gsap.fromTo(
+          word,
+          { color: "rgba(255,255,255,0.18)" },
+          {
+            color: i >= 6 && i <= 7
+              ? "rgba(172, 36, 34, 1)" // accent words (fresh ideas)
+              : "rgba(255,255,255,1)",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: `top+=${i * 22} center`,
+              end: `top+=${i * 22 + 120} center`,
+              scrub: true,
+            },
+          }
+        )
+      })
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative py-40 bg-black overflow-hidden"
+    >
+      {/* subtle dot grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:28px_28px]" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <h2 className="text-[clamp(36px,5vw,68px)] leading-[1.18] font-medium tracking-tight">
+          {text.split(" ").map((word, i) => (
+            <span
+              key={i}
+              ref={(el) => el && (wordRefs.current[i] = el)}
+              className="inline-block mr-3"
+            >
+              {word}
+            </span>
+          ))}
+        </h2>
       </div>
     </section>
   )
