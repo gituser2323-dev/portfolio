@@ -20,7 +20,7 @@ export function Hero() {
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
 
         {/* Availability Badge — intentionally offset */}
-        <div className="relative mb-10">
+        <div className="relative mb-10 mt-15">
           <div
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full
                        border border-white/15 bg-white/5 backdrop-blur-md
