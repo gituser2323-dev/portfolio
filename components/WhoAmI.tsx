@@ -22,11 +22,10 @@ export default function WhoAmI() {
                 src="/cover.jpeg"
                 alt="Pratik Sabale"
                 width={560}
-                height={720}
+                height={320}
                 priority
                 className="
                   object-cover
-                  grayscale
                   brightness-75
                   transition-all
                   duration-700

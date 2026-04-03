@@ -46,9 +46,9 @@ export default function Hero() {
 
         <div className="max-w-2xl mx-auto mb-12">
 
-          <p className="text-white text-xl md:text-2xl font-medium mb-5">
-            Inspiring the next generation of engineers to build India’s future
-          </p>
+          <p className="text-white text-xl md:text-1xl font-medium mb-5">
+            Most developers stay stuck in tutorials.
+            I help them build real systems.          </p>
 
           <p className="text-lg md:text-xl text-white/70 leading-relaxed">
             <span className="text-white font-semibold">End-to-end engineering</span>{" "}
@@ -65,11 +65,11 @@ export default function Hero() {
 
         <div className="flex justify-center gap-4 mb-10">
 
-          <button className="bg-red-500 hover:bg-red-600 px-8 py-4 rounded-xl text-white font-medium transition">
+          <button className="bg-red-500 hover:bg-red-600 px-8 py-3 rounded-xl text-white font-medium transition">
             Let’s Talk
           </button>
 
-          <button className="border border-white/20 hover:border-white px-8 py-4 rounded-xl text-white transition">
+          <button className="border border-white/20 hover:border-white px-8 py-3 rounded-xl text-white transition">
             View Work
           </button>
 
@@ -78,8 +78,7 @@ export default function Hero() {
         {/* Credibility */}
 
         <p className="text-sm text-white/60 tracking-wide mb-6">
-          Mentorship • Python • MERN + AI • Workshops • AI Automation • DevOps
-        </p>
+          MERN + AI • AI Engineering • Automation • Gen-AI • DevOps • Mentorship    </p>
 
         <p className="text-sm text-white/40 mb-10">
           Sessions & Workshops across Pune, Nashik, A.Nagar & Mumbai

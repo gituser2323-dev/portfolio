@@ -11,6 +11,7 @@ import WhoAmI from "@/components/WhoAmI"
 import Contact from "@/components/contact"
 import Blocks from "./Blocks"
 import Hero from "@/components/hero"
+import PocketSection from "@/components/PocketSection"
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <About />
 
       <WhoAmI />
+      {/* <PocketSection/> */}
       <Blocks />
 
       <Services />
