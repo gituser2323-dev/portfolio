@@ -15,7 +15,7 @@ export default function CourseContact() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
-  const [errors, setErrors] = useState<{[key:string]:string}>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const router = useRouter()
@@ -114,11 +114,16 @@ export default function CourseContact() {
         {/* TRACK */}
         <p className="text-lg mb-5 text-white/70">Which path interests you?</p>
         <div className="flex flex-wrap gap-3 mb-6">
-          {["MERN Stack","Python Full Stack","AI & Data Science","Career Mentorship"].map(t => (
+          {[
+            "Full Stack + AI Engineer",
+            "AI Automation & Agents",
+            "Data + AI Systems",
+            "Career Acceleration Program"
+          ].map(t => (
             <motion.button whileHover={{ scale: 1.05 }} key={t}
-              onClick={()=>setTrack(t)}
+              onClick={() => setTrack(t)}
               className={`px-5 py-2.5 rounded-full border text-sm transition
-              ${track===t?"bg-white text-black":"bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
+              ${track === t ? "bg-white text-black" : "bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
               {t}
             </motion.button>
           ))}
@@ -128,11 +133,11 @@ export default function CourseContact() {
         {/* GOAL */}
         <p className="text-lg mb-5 text-white/70">What is your goal?</p>
         <div className="flex gap-3 flex-wrap mb-6">
-          {["Get a job","Switch career","Freelancing","Build startup"].map(g => (
+          {["Get a job", "Switch career", "Freelancing", "Build startup"].map(g => (
             <motion.button whileHover={{ scale: 1.05 }} key={g}
-              onClick={()=>setGoal(g)}
+              onClick={() => setGoal(g)}
               className={`px-5 py-2.5 rounded-full border text-sm transition
-              ${goal===g?"bg-white text-black":"bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
+              ${goal === g ? "bg-white text-black" : "bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
               {g}
             </motion.button>
           ))}
@@ -142,11 +147,11 @@ export default function CourseContact() {
         {/* TIME */}
         <p className="text-lg mb-5 text-white/70">When do you want to start?</p>
         <div className="flex gap-3 mb-8">
-          {["Immediately","1 Month","Exploring"].map(t => (
+          {["Immediately", "1 Month", "Exploring"].map(t => (
             <motion.button whileHover={{ scale: 1.05 }} key={t}
-              onClick={()=>setTime(t)}
+              onClick={() => setTime(t)}
               className={`px-5 py-2.5 rounded-full border text-sm transition
-              ${time===t?"bg-white text-black":"bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
+              ${time === t ? "bg-white text-black" : "bg-white/[0.04] border-white/10 hover:bg-white hover:text-black"}`}>
               {t}
             </motion.button>
           ))}
@@ -156,23 +161,23 @@ export default function CourseContact() {
         {/* INPUTS */}
         <div className="grid md:grid-cols-2 gap-x-12 gap-y-10 mb-10">
           <div>
-            <input value={name} onChange={(e)=>setName(e.target.value)}
+            <input value={name} onChange={(e) => setName(e.target.value)}
               placeholder="Your Name"
-              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none"/>
+              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none" />
             {errors.name && <p className="text-red-400 text-xs mt-2">{errors.name}</p>}
           </div>
 
           <div>
-            <input value={phone} onChange={(e)=>setPhone(e.target.value)}
+            <input value={phone} onChange={(e) => setPhone(e.target.value)}
               placeholder="Phone Number"
-              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none"/>
+              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none" />
             {errors.phone && <p className="text-red-400 text-xs mt-2">{errors.phone}</p>}
           </div>
 
           <div className="col-span-2">
-            <input value={email} onChange={(e)=>setEmail(e.target.value)}
+            <input value={email} onChange={(e) => setEmail(e.target.value)}
               placeholder="Email (optional)"
-              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none"/>
+              className="w-full bg-transparent border-b border-white/10 focus:border-white py-3 outline-none" />
             {errors.email && <p className="text-red-400 text-xs mt-2">{errors.email}</p>}
           </div>
         </div>

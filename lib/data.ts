@@ -118,17 +118,17 @@ export const speakingEvents = [
     location: "Pune",
   },
   {
-    event: "VIT Pune Workshop Session",
+    event: "VIT Pune Workshop",
     topic: "Full-stack development and career guidance workshop for engineering students.",
     location: "Pune",
   },
   {
-    event: "JSPM Workshop Session",
+    event: "JSPM",
     topic: "Practical web development and industry-readiness training session.",
     location: "Pune",
   },
   {
-    event: "MMIT Workshop Session",
+    event: "MMIT Workshop",
     topic: "Building real-world projects with modern web technologies.",
     location: "Pune",
   },

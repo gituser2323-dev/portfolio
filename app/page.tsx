@@ -23,7 +23,7 @@ export default function Home() {
 
       <WhoAmI />
       {/* <PocketSection/> */}
-      <Blocks />
+      {/* <Blocks /> */}
 
       <Services />
       {/* <JourneyTimeline/> */}

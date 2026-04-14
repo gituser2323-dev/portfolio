@@ -3,22 +3,22 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
-import emailjs from "@emailjs/browser"
 import { useRouter } from "next/navigation"
 
 const INTERESTS = [
-  "Career Clarity & Growth Guidance",
-  "MERN Stack Mentorship (Job-Ready)",
-  "Corporate Workshops & Upskilling",
-  "Python Full-Stack Cohort Program",
-  "AI Automation for Real-World Use",
+  "GenAI / AI Engineer",
+  "Full Stack + DevOps + AI Systems",
+  "AI-Powered Creative Development",
+  "UI/UX + Product Design",
+  "Data Analytics + AI Insights",
+  "Career Acceleration Program"
 ]
 
 const PERSONAS = [
   "Student / Fresher",
   "Working Professional",
-  "Founder / Team Lead",
-  "Company / HR",
+  "Founder / Builder",
+  "Company / Hiring Team",
 ]
 
 export function EnquiryModal({ open, onClose }: any) {
@@ -34,72 +34,37 @@ export function EnquiryModal({ open, onClose }: any) {
 
   if (!open) return null
 
-  const validate = () => {
+  const submit = () => {
     if (!/^[6-9]\d{9}$/.test(phone)) {
-      setError("Please enter a valid 10-digit phone number")
-      return false
+      setError("Enter valid phone number")
+      return
     }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("Please enter a valid email address")
-      return false
-    }
-    setError("")
-    return true
-  }
-
-  const submitEnquiry = async () => {
-    if (!validate()) return
 
     setLoading(true)
-
-    try {
-      // Email to YOU
-    //   await emailjs.send(
-    //     "service_xxx",
-    //     "template_admin_enquiry",
-    //     {
-    //       interest,
-    //       persona,
-    //       phone,
-    //       email,
-    //     },
-    //     "public_xxx"
-    //   )
-
-      // Auto-reply to USER
-    //   await emailjs.send(
-    //     "service_xxx",
-    //     "template_user_reply",
-    //     {
-    //       interest,
-    //       user_email: email,
-    //     },
-    //     "public_xxx"
-    //   )
-
+    setTimeout(() => {
       onClose()
       router.push("/thank-you")
-    } catch (err) {
-      setError("Something went wrong. Please try again.")
-    } finally {
-      setLoading(false)
-    }
+    }, 1200)
   }
 
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
+        className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-xl flex items-center justify-center px-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="w-full max-w-xl bg-[#0b0b0b] border border-white/10 rounded-2xl p-8 relative"
-          initial={{ y: 30, opacity: 0 }}
+          className="w-full max-w-xl bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 relative overflow-hidden"
+          initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
         >
+
+          {/* 🔥 Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08),transparent_60%)] pointer-events-none" />
+
           {/* Close */}
           <button
             onClick={onClose}
@@ -108,17 +73,23 @@ export function EnquiryModal({ open, onClose }: any) {
             <X size={20} />
           </button>
 
-          {/* Progress */}
-          <div className="flex gap-2 mb-6">
-            {[1, 2, 3].map((i) => (
-              <motion.span
+          {/* 💎 HEADER */}
+          <div className="mb-8">
+            <p className="text-xs text-white/40 tracking-widest mb-2">
+              AI LEARNING PATH
+            </p>
+            <h3 className="text-2xl font-semibold">
+              Let’s build your roadmap
+            </h3>
+          </div>
+
+          {/* 📊 PROGRESS */}
+          <div className="flex gap-2 mb-8">
+            {[1, 2, 3].map(i => (
+              <div
                 key={i}
-                className="h-2 rounded-full"
-                animate={{
-                  width: step >= i ? 18 : 8,
-                  backgroundColor:
-                    step >= i ? "rgb(239,68,68)" : "rgba(255,255,255,0.25)",
-                }}
+                className={`h-1 flex-1 rounded-full ${step >= i ? "bg-white" : "bg-white/10"
+                  }`}
               />
             ))}
           </div>
@@ -126,18 +97,19 @@ export function EnquiryModal({ open, onClose }: any) {
           {/* STEP 1 */}
           {step === 1 && (
             <>
-              <h3 className="text-2xl font-semibold mb-6">
-                What are you looking for?
-              </h3>
+              <p className="mb-6 text-white/60">
+                What do you want to build?
+              </p>
+
               <div className="grid gap-3">
-                {INTERESTS.map((item) => (
+                {INTERESTS.map(item => (
                   <button
                     key={item}
                     onClick={() => {
                       setInterest(item)
                       setStep(2)
                     }}
-                    className="choice-card"
+                    className="choice-card hover:scale-[1.02]"
                   >
                     {item}
                   </button>
@@ -149,11 +121,12 @@ export function EnquiryModal({ open, onClose }: any) {
           {/* STEP 2 */}
           {step === 2 && (
             <>
-              <h3 className="text-2xl font-semibold mb-6">
-                Tell me about yourself
-              </h3>
-              <div className="grid gap-3 mb-6">
-                {PERSONAS.map((item) => (
+              <p className="mb-6 text-white/60">
+                Where are you currently?
+              </p>
+
+              <div className="grid gap-3">
+                {PERSONAS.map(item => (
                   <button
                     key={item}
                     onClick={() => {
@@ -166,39 +139,28 @@ export function EnquiryModal({ open, onClose }: any) {
                   </button>
                 ))}
               </div>
-
-              <button
-                onClick={() => setStep(3)}
-                className="text-sm text-white/40 hover:text-white"
-              >
-                Skip →
-              </button>
             </>
           )}
 
           {/* STEP 3 */}
           {step === 3 && (
             <>
-              <h3 className="text-2xl font-semibold mb-4">
-                How can I contact you?
-              </h3>
+              <p className="mb-6 text-white/60">
+                Get your personalized roadmap
+              </p>
 
               <input
-                type="tel"
-                inputMode="numeric"
-                maxLength={10}
                 placeholder="Phone number"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
-                className="w-full mb-3 bg-transparent border border-white/20 rounded-xl px-4 py-3 focus:outline-none"
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full mb-3 bg-transparent border border-white/20 rounded-xl px-4 py-3"
               />
 
               <input
-                type="email"
-                placeholder="Email address"
+                placeholder="Email (optional)"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full mb-4 bg-transparent border border-white/20 rounded-xl px-4 py-3 focus:outline-none"
+                className="w-full mb-4 bg-transparent border border-white/20 rounded-xl px-4 py-3"
               />
 
               {error && (
@@ -206,12 +168,16 @@ export function EnquiryModal({ open, onClose }: any) {
               )}
 
               <button
-                onClick={submitEnquiry}
-                disabled={loading}
-                className="nav-talk-btn w-full justify-center"
+                onClick={submit}
+                className="w-full py-3 bg-white text-black rounded-full font-medium hover:scale-105 transition"
               >
-                {loading ? "Submitting…" : "Submit enquiry"}
+                {loading ? "Generating..." : "Get My AI Roadmap"}
               </button>
+
+              {/* 🔥 TRUST */}
+              <p className="text-xs text-green-400 mt-4 text-center">
+                ● 1200+ students guided • Real-world systems focus
+              </p>
             </>
           )}
         </motion.div>
