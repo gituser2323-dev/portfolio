@@ -9,7 +9,7 @@ import { EnquiryModal } from "@/app/EnquiryModal"
 
 const MENU_ITEMS = [
   { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
+  { label: "Programs", href: "#services" },
   { label: "Speaking", href: "#speaking" },
   { label: "Insights", href: "#insights" },
   { label: "Contact", href: "#contact" },

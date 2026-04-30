@@ -12,15 +12,15 @@ import Contact from "@/components/contact"
 import Blocks from "./Blocks"
 import Hero from "@/components/hero"
 import PocketSection from "@/components/PocketSection"
+import Playground from "@/components/WordBlock"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
       <Hero/>
-
       <About />
-
+    {/* <Playground/> */}
       <WhoAmI />
       {/* <PocketSection/> */}
       {/* <Blocks /> */}
