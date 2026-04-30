@@ -18,10 +18,14 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      <Hero/>
-      <About />
-    {/* <Playground/> */}
+      <Hero />
       <WhoAmI />
+
+      {/* <Playground/> */}
+      <Services />
+      <About />
+
+
       {/* <PocketSection/> */}
       {/* <Blocks /> */}
 
