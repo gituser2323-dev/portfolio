@@ -36,7 +36,7 @@ export function WhatIDo() {
           {
             color:
               word.innerText.toLowerCase().includes("think")
-              ? "rgba(172, 36, 34, 1)" // accent words (fresh ideas)
+                ? "rgba(172, 36, 34, 1)" // accent words (fresh ideas)
                 : "rgba(255,255,255,1)",
             scrollTrigger: {
               trigger: containerRef.current,
@@ -106,8 +106,11 @@ export function WhatIDo() {
         })}
       </h3>
 
+
+
       {/* BODY */}
       <div className="space-y-6 text-[17px] leading-relaxed text-white/60">
+
         <p>
           I’m{" "}
           <span className="text-white/85 font-medium">
@@ -123,6 +126,12 @@ export function WhatIDo() {
             engineering judgment
           </span>
           , system-level clarity, and fundamentals that compound over time.
+        </p>
+        <p className="italic">
+          The biggest career risk today is
+          <span className="font-semibold" style={{color:"#C13438"}}>
+            {" "}preparing for yesterday's industry.
+          </span>
         </p>
       </div>
 

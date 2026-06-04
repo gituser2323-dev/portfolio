@@ -1,178 +1,432 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { ArrowRight } from "lucide-react"
-import { useRouter } from "next/navigation"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import {
+  motion,
+  useTransform,
+  useScroll,
+} from "framer-motion";
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import ShaderCursorDistortion from "./ShaderCursorDistortion";
+import RevealText from "./RevealText";
 
-gsap.registerPlugin(ScrollTrigger)
-
-const services = [
+const courses = [
   {
-    title: "Gen-AI Engineering",
-    desc: "Designing intelligent systems using LLMs, agents, and real-world AI architectures that think, automate, and scale.",
-    link: "/courses/gen-ai",
+    title: "GenAI Engineering",
+    badge: "Most In-Demand in 2027",
+    subtitle: "Generative AI • Agents • RAG • MCP",
+    description:
+      "Build AI applications, AI agents, LLM workflows, RAG systems and production-ready AI products used by modern startups and enterprises.",
+    outcomes: [
+      "GenAI Engineer",
+      "AI Application Developer",
+      "AI Product Builder",
+    ],
+    href: "/courses/gen-ai",
+  },
+
+  {
+    title: "MERN + AI",
+    badge: "Most Popular",
+    subtitle: "MERN • Next.js • Cloud",
+    description:
+      "Build scalable SaaS products, modern web applications, APIs and cloud-deployed systems with AI integrations.",
+    outcomes: [
+      "Full Stack Developer",
+      "Software Engineer",
+      "Frontend Engineer",
+    ],
+    href: "/courses/mern-stack",
+  },
+
+  {
+    title: "Java Full Stack + AI",
+    badge: "Enterprise Path",
+    subtitle: "Java • Spring Boot • React",
+    description:
+      "Master enterprise-grade application development, backend architecture and production-ready systems used by large organizations.",
+    outcomes: [
+      "Java Developer",
+      "Backend Engineer",
+      "Full Stack Engineer",
+    ],
+    href: "/courses/java-full-stack",
+  },
+
+  {
+    title: "Python Full Stack + AI",
+    subtitle: "Python • APIs • Automation",
+    description:
+      "Build backend systems, automation tools, cloud services and AI-powered applications using Python.",
+    outcomes: [
+      "Python Developer",
+      "Automation Engineer",
+      "Backend Developer",
+    ],
+    href: "/courses/python-full-stack",
+  },
+
+  {
+    title: "Data Science",
+    badge: "Analytics & AI",
+    subtitle: "Analytics • Data Science • ML",
+    description:
+      "Turn data into business decisions using SQL, Power BI, Python, Machine Learning and modern analytics workflows.",
+    outcomes: [
+      "Data Analyst",
+      "Data Scientist",
+      "Business Analyst",
+    ],
+    href: "/courses/data-science",
   },
   {
-    title: "Full Stack + DevOps + AI",
-    desc: "Building production-grade full stack applications with CI/CD pipelines, cloud infrastructure, and AI-powered features.",
-    link: "/courses/mern-devops-ai",
+    title: "Data Analytics",
+    badge: "Analytics & AI",
+    subtitle: "Analytics • Data Science • ML",
+    description:
+      "Turn data into business decisions using SQL, Power BI, Python, Machine Learning and modern analytics workflows.",
+    outcomes: [
+      "Data Analyst",
+      "Data Scientist",
+      "Business Analyst",
+    ],
+    href: "/courses/data-analyst",
   },
-  {
-    title: "UI / UX Design",
-    desc: "Crafting high-conversion interfaces using design psychology, user behavior, and modern product thinking.",
-    link: "/courses/ui-ux",
-  },
-  {
-    title: "Data Science & Analytics",
-    desc: "Transforming raw data into insights using machine learning, analytics, and decision intelligence systems.",
-    link: "/courses/data-science",
-  },
-]
+];
 
-export function Services() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
+export function CoursesExpertise() {
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const handleNavigate = (link: string) => {
-    // 🔥 System flash transition
-    gsap.to("body", {
-      backgroundColor: "#ffffff",
-      duration: 0.25,
-      ease: "power2.out",
-      onComplete: () => {
-        router.push(link)
-      },
-    })
-  }
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const headingY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, -100]
+  );
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const rows = gsap.utils.toArray<HTMLElement>(".service-row")
+    const el = document.createElement("canvas");
 
-      // 🚀 Reveal animation
-      gsap.from(rows, {
-        y: 150,
-        opacity: 0,
-        scale: 0.95,
-        duration: 1.4,
-        ease: "power4.out",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-        },
-      })
+    el.style.position = "fixed";
+    el.style.pointerEvents = "none";
+    el.style.left = "0";
+    el.style.top = "0";
+    el.style.width = "100%";
+    el.style.height = "100%";
+    el.style.zIndex = "0";
 
-      // 🌊 Parallax effect
-      rows.forEach((row) => {
-        gsap.to(row, {
-          y: -60,
-          scrollTrigger: {
-            trigger: row,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        })
-      })
+    document.body.appendChild(el);
 
-      // 🧲 Magnetic hover
-      rows.forEach((row) => {
-        const handleMouseMove = (e: MouseEvent) => {
-          const rect = row.getBoundingClientRect()
-          const x = e.clientX - rect.left
-          const y = e.clientY - rect.top
-
-          gsap.to(row, {
-            x: (x - rect.width / 2) * 0.05,
-            y: (y - rect.height / 2) * 0.05,
-            duration: 0.4,
-            ease: "power3.out",
-          })
-        }
-
-        const handleMouseLeave = () => {
-          gsap.to(row, {
-            x: 0,
-            y: 0,
-            duration: 0.6,
-            ease: "elastic.out(1, 0.4)",
-          })
-        }
-
-        row.addEventListener("mousemove", handleMouseMove)
-        row.addEventListener("mouseleave", handleMouseLeave)
-
-        // cleanup per row
-        return () => {
-          row.removeEventListener("mousemove", handleMouseMove)
-          row.removeEventListener("mouseleave", handleMouseLeave)
-        }
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+    return () => {
+      if (el && el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    };
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="bg-black text-white py-40 overflow-hidden relative"
-      id="services"
+      className="
+        relative
+        py-14 sm:py-16 md:py-20 lg:py-24
+        bg-black text-white
+        overflow-x-hidden
+      "
     >
-      {/* 🔥 Ambient Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.08),transparent_60%)] pointer-events-none" />
+      <ShaderCursorDistortion />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <p className="text-white/20 mb-16 text-lg tracking-widest uppercase">
-          Our expertise
-        </p>
+      {/* Decorative Blob */}
+      <div
+        className="
+          absolute top-0 left-0
+          w-[250px] h-[250px]
+          sm:w-[350px] sm:h-[350px]
+          md:w-[500px] md:h-[500px]
+          pointer-events-none
+        "
+      />
 
-        <div className="border border-white/10 backdrop-blur-sm">
-          {services.map((service, i) => (
-            <div
-              key={i}
-              onClick={() => handleNavigate(service.link)}
-              className="group relative block border-b border-white/10 last:border-none overflow-hidden service-row cursor-pointer"
-            >
-              {/* 💡 Label */}
-              <span className="absolute top-6 left-10 text-xs text-white/30 tracking-widest uppercase group-hover:text-black/60 transition">
-                Enter Program
-              </span>
+      <div
+        className="
+          max-w-[1500px]
+          mx-auto
+          px-4 sm:px-6 md:px-10 lg:px-16
+          relative z-10
+          w-full
+        "
+      >
 
-              {/* 🔥 Hover gradient */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-neutral-200 to-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
-              </div>
+        {/* HERO */}
+        <motion.div
+          style={{ y: headingY }}
+          className="
+            text-center
+            max-w-5xl
+            mx-auto
+            mb-14 sm:mb-16 md:mb-20 lg:mb-28
+          "
+        >
 
-              {/* Glow line */}
-              <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-white/40 group-hover:w-full transition-all duration-700" />
 
-              <div className="relative z-10 flex items-center justify-between px-10 py-20 transition-all duration-500 group-hover:scale-[1.03]">
-                <h3 className="text-4xl md:text-5xl font-semibold tracking-tight transition-all duration-500 group-hover:text-black">
-                  {service.title}
-                </h3>
+          {/* SEO TEXT */}
+          <p className="sr-only">
+            Industry-focused IT training institute in Pune offering
+            MERN Stack, Java Full Stack, Python, AI,
+            Data Science and DevOps courses with placement support.
+          </p>
 
-                <div className="flex items-center gap-10">
-                  <p className="hidden md:block max-w-sm text-white/50 group-hover:text-black/70 transition-all duration-500 text-lg">
-                    {service.desc}
-                  </p>
 
-                  <ArrowRight
-                    size={38}
-                    className="transition-all duration-500 group-hover:translate-x-6 group-hover:rotate-12 group-hover:text-black"
-                  />
-                </div>
-              </div>
+        </motion.div>
 
-              {/* 💎 Noise texture */}
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('/noise.png')]" />
-            </div>
+        {/* Section Label */}
+        <div
+          className="
+            mt-14 sm:mt-16 md:mt-20 lg:mt-24
+            mb-6 sm:mb-8 md:mb-12
+            text-center
+          "
+        >
+          <RevealText text="Choose Your Future Role" />
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <p className="text-red-500 uppercase tracking-[0.3em] text-xs font-medium">
+              AI-Powered Career Transformation
+            </p>
+
+            <h2 className="mt-4 text-4xl md:text-5xl font-black ">
+              BUILD THE SKILLS
+              COMPANIES WILL
+              HIRE FOR IN 2027
+            </h2>
+
+            <p className="mt-6 text-zinc-400 text-lg">
+              Every path is designed around real projects,
+              AI-powered workflows, mentorship and industry readiness.
+            </p>
+          </div>
+        </div>
+
+        {/* Glass Container */}
+        <div
+          className="
+            rounded-2xl sm:rounded-3xl
+            border border-white/15
+            bg-white/[0.02]
+            backdrop-blur-2xl
+            overflow-hidden
+            w-full
+          "
+        >
+          {courses.map((course) => (
+            <CourseRow
+              key={course.title}
+              course={course}
+            />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
+}
+
+function CourseRow({
+  course,
+  index,
+}: {
+  course: any;
+  index: number;
+}) {
+  return (
+    <Link href={course.href}>
+      <motion.div
+        initial="rest"
+        whileHover="hover"
+        animate="rest"
+        className="
+          group
+          relative
+          overflow-hidden
+          border-b border-white/10
+          last:border-none
+          cursor-pointer
+        "
+      >
+        {/* Background Glow */}
+        <motion.div
+          variants={{
+            rest: { opacity: 0 },
+            hover: { opacity: 1 },
+          }}
+          transition={{ duration: 0.4 }}
+          className="
+            absolute inset-0
+            bg-gradient-to-r
+            from-red-500/10
+            via-red-500/5
+            to-transparent
+          "
+        />
+
+        {/* Huge Number */}
+        <div
+          className="
+            absolute
+            right-8
+            top-1/2
+            -translate-y-1/2
+            text-[180px]
+            font-black
+            text-white/[0.03]
+            pointer-events-none
+            hidden lg:block
+          "
+        >
+          {String(index + 1).padStart(2, "0")}
+        </div>
+
+        <div
+          className="
+            relative z-10
+            px-8 md:px-12
+            py-10 md:py-14
+          "
+        >
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+
+            {/* LEFT */}
+
+            <div className="lg:col-span-5">
+              <span
+                className="
+                  inline-flex
+                  px-4 py-2
+                  rounded-full
+                  border border-red-500/20
+                  bg-red-500/10
+                  text-red-400
+                  text-xs
+                  uppercase
+                  tracking-[0.2em]
+                "
+              >
+                {course.badge}
+              </span>
+
+              <motion.h3
+                variants={{
+                  rest: { x: 0 },
+                  hover: { x: 8 },
+                }}
+                className="
+                  mt-6
+                  text-4xl
+                  md:text-6xl
+                  font-black
+                  tracking-[-0.05em]
+                  leading-none
+                "
+              >
+                {course.title}
+              </motion.h3>
+
+              <p
+                className="
+                  mt-4
+                  text-red-400
+                  uppercase
+                  tracking-[0.25em]
+                  text-sm
+                "
+              >
+                {course.subtitle}
+              </p>
+            </div>
+
+            {/* CENTER */}
+
+            <div className="lg:col-span-4">
+              <p
+                className="
+                  text-zinc-400
+                  text-lg
+                  leading-relaxed
+                "
+              >
+                {course.description}
+              </p>
+
+              <div className="mt-8">
+                <div
+                  className="
+                    text-xs
+                    uppercase
+                    tracking-[0.2em]
+                    text-zinc-500
+                    mb-3
+                  "
+                >
+                  Career Outcomes
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {course.outcomes.map((item: string) => (
+                    <span
+                      key={item}
+                      className="
+                        px-3 py-2
+                        rounded-full
+                        bg-white/5
+                        border border-white/10
+                        text-sm
+                        text-zinc-300
+                      "
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT */}
+
+            <div className="lg:col-span-3 flex lg:justify-end">
+              <motion.div
+                variants={{
+                  rest: {
+                    scale: 1,
+                    x: 0,
+                  },
+                  hover: {
+                    scale: 1.08,
+                    x: 8,
+                  },
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 250,
+                }}
+                className="
+                  h-16
+                  w-16
+                  rounded-full
+                  border border-white/10
+                  bg-white/[0.03]
+                  flex items-center justify-center
+                  text-2xl
+                  backdrop-blur-xl
+                "
+              >
+                →
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
+  );
 }
