@@ -20,59 +20,48 @@ export default function GenAIHeroo() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const card = cardRef.current;
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setOpen(false);
+        };
 
-        gsap.from(".badge", {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-        });
-
-        gsap.from(".title-line", {
-            opacity: 0,
-            y: 80,
-            duration: 1,
-            stagger: 0.12,
-            ease: "power4.out",
-        });
-
-        gsap.from(".desc", {
-            opacity: 0,
-            y: 30,
-            delay: 0.4,
-            duration: 1,
-        });
-
-        gsap.from(".cta", {
-            opacity: 0,
-            y: 30,
-            delay: 0.6,
-            duration: 1,
-        });
-
-      if (!card) return;
-
-const rotateY = gsap.quickTo(card, "rotateY", {
-  duration: 0.4,
-});
-
-const rotateX = gsap.quickTo(card, "rotateX", {
-  duration: 0.4,
-});
-
-const move = (e: MouseEvent) => {
-  const x = e.clientX / window.innerWidth - 0.5;
-  const y = e.clientY / window.innerHeight - 0.5;
-
-  rotateY(x * 10);
-  rotateX(-y * 10);
-};
-
-        window.addEventListener("mousemove", move);
+        window.addEventListener("keydown", handleEsc);
 
         return () => {
-            window.removeEventListener("mousemove", move);
+            window.removeEventListener("keydown", handleEsc);
         };
+    }, []);
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(".badge", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+            });
+
+            gsap.from(".title-line", {
+                opacity: 0,
+                y: 80,
+                duration: 1,
+                stagger: 0.12,
+                ease: "power4.out",
+            });
+
+            gsap.from(".desc", {
+                opacity: 0,
+                y: 30,
+                delay: 0.4,
+                duration: 1,
+            });
+
+            gsap.from(".cta", {
+                opacity: 0,
+                y: 30,
+                delay: 0.6,
+                duration: 1,
+            });
+        }, heroRef);
+
+        return () => ctx.revert();
     }, []);
 
     const handleSubmit = async (
@@ -303,9 +292,9 @@ const move = (e: MouseEvent) => {
                             Apply Now
                         </button>
 
-<button
-  onClick={() => setCurriculumOpen(true)}
-  className="
+                        <button
+                            onClick={() => setCurriculumOpen(true)}
+                            className="
     h-14
     px-8
     rounded-2xl
@@ -315,9 +304,9 @@ const move = (e: MouseEvent) => {
     text-white
     backdrop-blur-xl
   "
->
-  Explore Curriculum
-</button>
+                        >
+                            Explore Curriculum
+                        </button>
                     </div>
                 </div>
 
