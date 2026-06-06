@@ -1,14 +1,12 @@
-
-import GenAIToolSection from "@/components/GenAIToolSection"
-import GenAIHero from "@/components/GenAIHero"
-import TheGenAIShiftSection from "@/components/GenAITransformation"
-import GenAIProjectsSection from "@/components/GenAIProject"
-import TechStackSection from "@/components/TechStackGenAI"
-import CurriculumRoadmapSection from "@/components/GenAICurriculum"
-import FounderLetterSection from "@/components/FounderSection"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
-
+import FounderLetterSection from "@/components/FounderSection";
+import CurriculumRoadmapSection from "@/components/GenAICurriculum";
+import GenAIHero from "@/components/GenAIHero";
+import GenAIProjectsSection from "@/components/GenAIProject";
+import GenAIToolSection from "@/components/GenAIToolSection";
+import TheGenAIShiftSection from "@/components/GenAITransformation";
+import { Navbar } from "@/components/navbar";
+import TechStackSection from "@/components/TechStackGenAI";
+import { Footer } from "react-day-picker";
 
 
 export default function Hero() {
