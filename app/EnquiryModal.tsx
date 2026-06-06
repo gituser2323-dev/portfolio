@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import { useRouter } from "next/navigation"
+import emailjs from "@emailjs/browser"
 
 const INTERESTS = [
   "GenAI / AI Engineer",
@@ -33,19 +34,37 @@ export function EnquiryModal({ open, onClose }: any) {
   const [error, setError] = useState("")
 
   if (!open) return null
-
-  const submit = () => {
-    if (!/^[6-9]\d{9}$/.test(phone)) {
-      setError("Enter valid phone number")
-      return
-    }
-
-    setLoading(true)
-    setTimeout(() => {
-      onClose()
-      router.push("/thank-you")
-    }, 1200)
+const submit = async () => {
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    setError("Enter valid phone number")
+    return
   }
+
+  try {
+    setLoading(true)
+
+    await emailjs.send(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      {
+        interest,
+        persona,
+        phone,
+        email,
+        submittedAt: new Date().toLocaleString(),
+      },
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    )
+
+    onClose()
+    router.push("/thank-you")
+  } catch (err) {
+    console.error(err)
+    setError("Something went wrong")
+  } finally {
+    setLoading(false)
+  }
+}
 
   return (
     <AnimatePresence>

@@ -75,7 +75,7 @@ export function About() {
   }, [])
 
   return (
-    <section className="bg-black text-white py-32 overflow-hidden">
+    <section className="bg-black text-white py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* GRID */}
@@ -103,7 +103,7 @@ export function About() {
               Most developers spend years stuck in tutorials, learning tools but never building anything that works in the real world.
 
               I focus on changing that.
-              
+
 
               I help developers transition into builders by working on real-world systems using MERN, AI, and automation.
 
@@ -124,7 +124,7 @@ export function About() {
                       // "/img8.jpeg",
                       "/img9.jpeg",
                       "/img10.jpeg",
-                      "/img11.jpeg",
+                      // "/img11.jpeg",
                       "/img2.jpeg",
 
                       "/img12.jpeg",
@@ -133,6 +133,7 @@ export function About() {
 
                       "/img15.jpeg",
                       "/img16.jpeg",
+                      "/img20.jpeg"
 
 
 
@@ -170,13 +171,17 @@ export function About() {
           <div className="flex flex-wrap justify-center gap-4">
 
             {[
+              "GenAI",
+              "RAG",
               "React",
               "Next JS",
+              "Devops",
               "MongoDB",
               "Tailwind",
               "Node",
               "OpenAI",
               "Docker",
+              "Python"
             ].map((tech, i) => (
               <div
                 key={i}

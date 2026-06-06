@@ -9,6 +9,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import ShaderCursorDistortion from "./ShaderCursorDistortion";
 import RevealText from "./RevealText";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 
 const courses = [
   {
@@ -26,7 +27,7 @@ const courses = [
   },
 
   {
-    title: "MERN + AI",
+    title: "MERN + Devops :) AI",
     badge: "Most Popular",
     subtitle: "MERN • Next.js • Cloud",
     description:
@@ -40,7 +41,7 @@ const courses = [
   },
 
   {
-    title: "Java Full Stack + AI",
+    title: "Full Stack + AI",
     badge: "Enterprise Path",
     subtitle: "Java • Spring Boot • React",
     description:
@@ -55,6 +56,7 @@ const courses = [
 
   {
     title: "Python Full Stack + AI",
+    badge:"Future Demands",
     subtitle: "Python • APIs • Automation",
     description:
       "Build backend systems, automation tools, cloud services and AI-powered applications using Python.",
@@ -67,7 +69,7 @@ const courses = [
   },
 
   {
-    title: "Data Science",
+    title: "Data Science and Analytics",
     badge: "Analytics & AI",
     subtitle: "Analytics • Data Science • ML",
     description:
@@ -78,19 +80,6 @@ const courses = [
       "Business Analyst",
     ],
     href: "/courses/data-science",
-  },
-  {
-    title: "Data Analytics",
-    badge: "Analytics & AI",
-    subtitle: "Analytics • Data Science • ML",
-    description:
-      "Turn data into business decisions using SQL, Power BI, Python, Machine Learning and modern analytics workflows.",
-    outcomes: [
-      "Data Analyst",
-      "Data Scientist",
-      "Business Analyst",
-    ],
-    href: "/courses/data-analyst",
   },
 ];
 
@@ -133,7 +122,7 @@ export function CoursesExpertise() {
       ref={sectionRef}
       className="
         relative
-        py-14 sm:py-16 md:py-20 lg:py-24
+        py-10 sm:py-10 md:py-10 lg:py-10
         bg-black text-white
         overflow-x-hidden
       "
@@ -191,23 +180,159 @@ export function CoursesExpertise() {
             text-center
           "
         >
-          <RevealText text="Choose Your Future Role" />
-          <div className="max-w-3xl mx-auto text-center mb-10">
-            <p className="text-red-500 uppercase tracking-[0.3em] text-xs font-medium">
-              AI-Powered Career Transformation
-            </p>
+         <div className="relative max-w-4xl mx-auto text-center mb-16">
 
-            <h2 className="mt-4 text-4xl md:text-5xl font-black ">
-              BUILD THE SKILLS
-              COMPANIES WILL
-              HIRE FOR IN 2027
-            </h2>
+  {/* Ambient Glow */}
 
-            <p className="mt-6 text-zinc-400 text-lg">
-              Every path is designed around real projects,
-              AI-powered workflows, mentorship and industry readiness.
-            </p>
-          </div>
+  <motion.div
+    animate={{
+      scale: [1, 1.2, 1],
+      opacity: [0.2, 0.35, 0.2],
+    }}
+    transition={{
+      duration: 6,
+      repeat: Infinity,
+    }}
+    className="
+      absolute
+      left-1/2
+      top-0
+      -translate-x-1/2
+      h-40
+      w-40
+      rounded-full
+      bg-red-500/20
+      blur-3xl
+    "
+  />
+
+  {/* Badge */}
+
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+    className="
+      inline-flex
+      items-center
+      gap-2
+      rounded-full
+      border
+      border-red-500/70
+      
+      backdrop-blur-xl
+      px-4
+      py-2
+    "
+  >
+    <Sparkles size={12} className="text-red-500" />
+
+    <span
+      className="
+        text-[10px]
+        sm:text-xs
+        font-semibold
+        uppercase
+        tracking-[0.2em]
+        text-white
+      "
+    >
+      AI-Powered Career Transformation
+    </span>
+  </motion.div>
+
+  {/* Heading */}
+<h2
+  className="
+    mt-4
+    text-4xl
+    sm:text-5xl
+    md:text-6xl
+    font-black
+
+    text-transparent
+    bg-clip-text
+
+    bg-gradient-to-r
+    from-white
+    via-white
+    to-red-500
+
+    drop-shadow-[0_0_30px_rgba(231,0,11,0.35)]
+  "
+>
+  BUILD THE SKILLS
+  <br />
+  COMPANIES WILL
+  
+  HIRE FOR IN 2027
+</h2>
+
+  {/* Animated Accent */}
+
+  <motion.div
+    animate={{
+      width: ["80px", "120px", "80px"],
+    }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+    }}
+    className="
+      mx-auto
+      mt-6
+      h-[3px]
+      rounded-full
+      bg-gradient-to-r
+      from-transparent
+      via-red-500
+      to-transparent
+    "
+  />
+
+  {/* Floating Particles */}
+
+  <motion.div
+    animate={{
+      y: [0, -8, 0],
+    }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+    }}
+    className="
+      absolute
+      top-10
+      right-10
+      h-2
+      w-2
+      rounded-full
+      bg-red-500/40
+    "
+  />
+
+  <motion.div
+    animate={{
+      y: [0, -10, 0],
+    }}
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+      delay: 1,
+    }}
+    className="
+      absolute
+      left-10
+      bottom-5
+      h-1.5
+      w-1.5
+      rounded-full
+      bg-white/50
+    "
+  />
+
+</div>
         </div>
 
         {/* Glass Container */}
@@ -241,192 +366,147 @@ function CourseRow({
   index: number;
 }) {
   return (
-    <Link href={course.href}>
-      <motion.div
-        initial="rest"
-        whileHover="hover"
-        animate="rest"
+  <Link href={course.href}>
+  <motion.div
+    whileTap={{ scale: 0.98 }}
+    className="
+      group
+      relative
+      overflow-hidden
+      rounded-[28px]
+      border
+      border-white/10
+      bg-white/[0.03]
+      backdrop-blur-xl
+      p-5
+      m-10
+      transition-all
+      duration-300
+    "
+  >
+    {/* Glow */}
+
+    <div
+      className="
+        absolute
+        -right-12
+        -top-12
+        h-32
+        w-32
+        rounded-full
+        bg-red-500/10
+        blur-3xl
+      "
+    />
+
+    <div className="relative z-10">
+
+      {/* Top */}
+
+      <div className="flex items-start justify-between gap-4">
+
+        <div>
+
+          <span
+            className="
+              inline-flex
+              rounded-full
+              border
+              border-red-500/20
+              bg-red-500/10
+              px-3
+              py-1
+              text-[10px]
+              font-semibold
+              uppercase
+              tracking-wider
+              text-red-400
+            "
+          >
+            {course.badge}
+          </span>
+
+          <h3
+            className="
+              mt-4
+              text-2xl
+              md:text-3xl
+              font-black
+              leading-none
+            "
+          >
+            {course.title}
+          </h3>
+
+          <p
+            className="
+              mt-2
+              text-sm
+              text-zinc-500
+            "
+          >
+            {course.subtitle}
+          </p>
+
+        </div>
+
+        <div
+          className="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            bg-white/5
+            border border-white/10
+            shrink-0
+          "
+        >
+          <ArrowUpRight size={18} />
+        </div>
+
+      </div>
+
+      {/* Description */}
+
+      <p
         className="
-          group
-          relative
-          overflow-hidden
-          border-b border-white/10
-          last:border-none
-          cursor-pointer
+          mt-5
+          text-sm
+          leading-relaxed
+          text-zinc-400
         "
       >
-        {/* Background Glow */}
-        <motion.div
-          variants={{
-            rest: { opacity: 0 },
-            hover: { opacity: 1 },
-          }}
-          transition={{ duration: 0.4 }}
-          className="
-            absolute inset-0
-            bg-gradient-to-r
-            from-red-500/10
-            via-red-500/5
-            to-transparent
-          "
-        />
+        {course.description}
+      </p>
 
-        {/* Huge Number */}
-        <div
-          className="
-            absolute
-            right-8
-            top-1/2
-            -translate-y-1/2
-            text-[180px]
-            font-black
-            text-white/[0.03]
-            pointer-events-none
-            hidden lg:block
-          "
-        >
-          {String(index + 1).padStart(2, "0")}
-        </div>
+      {/* Outcomes */}
 
-        <div
-          className="
-            relative z-10
-            px-8 md:px-12
-            py-10 md:py-14
-          "
-        >
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
+      <div className="mt-5 flex flex-wrap gap-2">
 
-            {/* LEFT */}
+        {course.outcomes.slice(0, 4).map((item) => (
+          <span
+            key={item}
+            className="
+              rounded-full
+              border
+              border-white/10
+              bg-white/[0.03]
+              px-3
+              py-1.5
+              text-xs
+              text-zinc-300
+            "
+          >
+            {item}
+          </span>
+        ))}
 
-            <div className="lg:col-span-5">
-              <span
-                className="
-                  inline-flex
-                  px-4 py-2
-                  rounded-full
-                  border border-red-500/20
-                  bg-red-500/10
-                  text-red-400
-                  text-xs
-                  uppercase
-                  tracking-[0.2em]
-                "
-              >
-                {course.badge}
-              </span>
+      </div>
 
-              <motion.h3
-                variants={{
-                  rest: { x: 0 },
-                  hover: { x: 8 },
-                }}
-                className="
-                  mt-6
-                  text-4xl
-                  md:text-6xl
-                  font-black
-                  tracking-[-0.05em]
-                  leading-none
-                "
-              >
-                {course.title}
-              </motion.h3>
-
-              <p
-                className="
-                  mt-4
-                  text-red-400
-                  uppercase
-                  tracking-[0.25em]
-                  text-sm
-                "
-              >
-                {course.subtitle}
-              </p>
-            </div>
-
-            {/* CENTER */}
-
-            <div className="lg:col-span-4">
-              <p
-                className="
-                  text-zinc-400
-                  text-lg
-                  leading-relaxed
-                "
-              >
-                {course.description}
-              </p>
-
-              <div className="mt-8">
-                <div
-                  className="
-                    text-xs
-                    uppercase
-                    tracking-[0.2em]
-                    text-zinc-500
-                    mb-3
-                  "
-                >
-                  Career Outcomes
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {course.outcomes.map((item: string) => (
-                    <span
-                      key={item}
-                      className="
-                        px-3 py-2
-                        rounded-full
-                        bg-white/5
-                        border border-white/10
-                        text-sm
-                        text-zinc-300
-                      "
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT */}
-
-            <div className="lg:col-span-3 flex lg:justify-end">
-              <motion.div
-                variants={{
-                  rest: {
-                    scale: 1,
-                    x: 0,
-                  },
-                  hover: {
-                    scale: 1.08,
-                    x: 8,
-                  },
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 250,
-                }}
-                className="
-                  h-16
-                  w-16
-                  rounded-full
-                  border border-white/10
-                  bg-white/[0.03]
-                  flex items-center justify-center
-                  text-2xl
-                  backdrop-blur-xl
-                "
-              >
-                →
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </Link>
+    </div>
+  </motion.div>
+</Link>
   );
 }

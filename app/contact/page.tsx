@@ -1,15 +1,20 @@
-import ContactFormSection from '@/components/ContactFormSection'
-import ContactHero from '@/components/ContactHero'
-import SpeedupContactInfo from '@/components/SpeedupContactInfo'
-import React from 'react'
 
-export default function page() {
+import { Footer } from "@/components/footer"
+import { Navbar } from "@/components/navbar"
+
+
+
+export default function Hero() {
+
   return (
-   <>
-   <ContactHero/>
-   <ContactFormSection/>
-   <SpeedupContactInfo/>
-   
-   </>
+    <>
+
+      <Navbar />
+     
+
+      <Footer />
+
+    </>
   )
 }
+
