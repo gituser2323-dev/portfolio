@@ -15,6 +15,7 @@ export default function GenAIHero() {
     const [goal, setGoal] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [curriculumOpen, setCurriculumOpen] = useState(false);
 
     const [error, setError] = useState("");
 
@@ -57,7 +58,7 @@ const rotateY = gsap.quickTo(card, "rotateY", {
 
 const rotateX = gsap.quickTo(card, "rotateX", {
   duration: 0.4,
-},);
+});
 
 const move = (e: MouseEvent) => {
   const x = e.clientX / window.innerWidth - 0.5;
