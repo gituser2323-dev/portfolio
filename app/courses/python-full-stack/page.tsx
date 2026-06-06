@@ -17,7 +17,7 @@ export default function Hero() {
     <>
 
       <Navbar />
-      <GenAIHeroo/>
+      {/* <GenAIHeroo/> */}
       <GenAIToolSection />
       <TheGenAIShiftSection />
       <GenAIProjectsSection />

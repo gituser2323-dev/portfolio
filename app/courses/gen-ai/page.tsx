@@ -17,7 +17,7 @@ export default function DataScienceSection() {
     <>
 
       <Navbar />
-      <GenAIHeroo />
+      {/* <GenAIHeroo /> */}
       <GenAIToolSection />
       <TheGenAIShiftSection/>
       <GenAIProjectsSection />
