@@ -1,6 +1,6 @@
 import FounderLetterSection from "@/components/FounderSection";
 import CurriculumRoadmapSection from "@/components/GenAICurriculum";
-import GenAIHero from "@/components/GenAIHero";
+import GenAIHeroo from "@/components/GenAIHero";
 import GenAIProjectsSection from "@/components/GenAIProject";
 import GenAIToolSection from "@/components/GenAIToolSection";
 import TheGenAIShiftSection from "@/components/GenAITransformation";
@@ -17,7 +17,7 @@ export default function DataScienceSection() {
     <>
 
       <Navbar />
-      <GenAIHero />
+      <GenAIHeroo />
       <GenAIToolSection />
       <TheGenAIShiftSection/>
       <GenAIProjectsSection />

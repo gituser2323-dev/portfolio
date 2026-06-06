@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import emailjs from "@emailjs/browser"
 
 
-export default function GenAIHero() {
+export default function GenAIHeroo() {
     const heroRef = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
