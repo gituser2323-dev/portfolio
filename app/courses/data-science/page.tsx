@@ -1,7 +1,6 @@
 
 import GenAIToolSection from "@/components/GenAIToolSection"
 
-import GenAIHero from "@/components/GenAIHero"
 
 import TheGenAIShiftSection from "@/components/GenAITransformation"
 import GenAIProjectsSection from "@/components/GenAIProject"
@@ -10,6 +9,7 @@ import CurriculumRoadmapSection from "@/components/GenAICurriculum"
 import FounderLetterSection from "@/components/FounderSection"
 import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
+import GenAIHero from "@/components/GenAIHero"
 
 
 

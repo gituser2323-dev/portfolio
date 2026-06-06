@@ -4,7 +4,7 @@ import LearningApproachSection from '@/components/LearningApproachSection'
 import OutcomesSection from '@/components/OutcomesSection'
 import { CoursesExpertise } from '@/components/services'
 
-export default function page() {
+export default function Home() {
     return (
         <>
             <LearningApproachSection />
