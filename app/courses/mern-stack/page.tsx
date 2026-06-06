@@ -1,7 +1,7 @@
 import FounderLetterSection from "@/components/FounderSection";
 import CurriculumRoadmapSection from "@/components/GenAICurriculum";
-import GenAIHeroo from "@/components/GenAIHero";
 import GenAIProjectsSection from "@/components/GenAIProject";
+import GenAISection from "@/components/GenAISection";
 import GenAIToolSection from "@/components/GenAIToolSection";
 import TheGenAIShiftSection from "@/components/GenAITransformation";
 import { Navbar } from "@/components/navbar";
@@ -15,7 +15,7 @@ export default function Hero() {
     <>
 
       <Navbar />
-      {/* <GenAIHeroo /> */}
+      <GenAISection />
       <GenAIToolSection />
       <TheGenAIShiftSection />
       <GenAIProjectsSection />
