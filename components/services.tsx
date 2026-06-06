@@ -8,7 +8,6 @@ import {
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import ShaderCursorDistortion from "./ShaderCursorDistortion";
-import RevealText from "./RevealText";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 
 const courses = [
