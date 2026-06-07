@@ -287,7 +287,8 @@ export default function Hero() {
                 </Link>
 
                 <Link
-                  href="https://www.speedupinfotech.com/placements"
+                  // href="https://www.speedupinfotech.com/placements"
+                  href="#work"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
@@ -307,7 +308,7 @@ export default function Hero() {
     hover:shadow-[0_0_32px_rgba(255,255,255,0.08)]
   "
                 >
-                  View Placements →
+                  View Work →
                 </Link>
               </div>
             )}
