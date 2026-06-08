@@ -76,14 +76,14 @@ export function About() {
 
   return (
     <section className="bg-black text-white py-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
 
         {/* GRID */}
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="grid md:grid-cols-2  gap-16 items-start ">
           <div className="bg-red-600 rounded-3xl p-10 h-[420px] flex flex-col justify-between">
             <div>
               <p className="text-white/70 text-lg"> BUILD, ADAPT, AND LEVERAGE AI.</p>
-              <h2 className="text-4xl font-bold mt-2">1200+ Students Trained</h2>
+              <h2 className="text-2xl lg:text-3xl  font-bold mt-2">1200+ Students Trained</h2>
 
             </div>
 
@@ -99,7 +99,7 @@ export function About() {
               My Time as a Mentor
             </h3>
 
-            <p className="text-white/60 leading-relaxed mb-8 max-w-lg">
+            <p className="text-white/60 leading-relaxed mb-8 text-sm max-w-lg ">
               Most developers spend years stuck in tutorials, learning tools but never building anything that works in the real world.
 
               I focus on changing that.

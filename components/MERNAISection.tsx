@@ -195,7 +195,7 @@ shadow-[0_0_120px_rgba(255,255,255,0.05)]
             backdrop-blur-xl
           "
                     >
-                        AI ENGINEERING PROGRAM
+MERN + AI Engineering Cohort
                     </div>
 
                     <div className="mt-10">
@@ -228,7 +228,8 @@ shadow-[0_0_120px_rgba(255,255,255,0.05)]
     md:mx-5
   "
                         >
-                            GenAI
+                           Full Stack AI
+
                         </span>
 
                         <span
@@ -260,10 +261,12 @@ shadow-[0_0_120px_rgba(255,255,255,0.05)]
     leading-relaxed
   "
                     >
-                        Master LLMs, RAG, Agents, MCP, LangGraph,
-                        AI Automation and Production Deployment.
-                        Build AI systems that solve real business
-                        problems at scale.
+                   Master MERN Stack, Next.js, AI Agents,
+RAG, LangGraph, Cloud and DevOps.
+
+Build real-world applications, deploy
+them to production and become ready
+for startup and product engineering roles.
                     </p>
 
                     <div
@@ -311,7 +314,7 @@ shadow-[0_0_120px_rgba(255,255,255,0.05)]
     backdrop-blur-xl
   "
                         >
-                            <a href="https://app.notion.com/p/GEN-AI-MASTER-PROGRAM-32d38dc05e9f8011bd1fcf65c96c5f3d?source=copy_link" target="_blank">
+                            <a href="https://app.notion.com/p/AI-Powered-Full-Stack-COHORT-31b38dc05e9f80d48998d5691a895038?source=copy_link" target="_blank">
                             Explore Curriculum
                             </a>
                         </button>
@@ -335,8 +338,8 @@ shadow-[0_0_120px_rgba(255,255,255,0.05)]
   "
                 >
                     {[
-                        ["6+", "AI Projects"],
-                        ["12+", "Production Tools"],
+                        ["3+", "AI Projects"],
+                        ["15+", "Production Tools"],
                         ["100%", "Hands-On"],
                     ].map(([v, t]) => (
                         <div key={t} className="text-center">

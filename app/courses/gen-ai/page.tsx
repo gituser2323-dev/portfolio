@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer";
 import FounderLetterSection from "@/components/FounderSection";
 import CurriculumRoadmapSection from "@/components/GenAICurriculum";
 import GenAIHeroo from "@/components/GenAIHero";
@@ -7,7 +8,6 @@ import GenAIToolSection from "@/components/GenAIToolSection";
 import TheGenAIShiftSection from "@/components/GenAITransformation";
 import { Navbar } from "@/components/navbar";
 import TechStackSection from "@/components/TechStackGenAI";
-import { Footer } from "react-day-picker";
 
 
 
@@ -25,7 +25,6 @@ export default function DataScienceSection() {
       <TechStackSection />
       <CurriculumRoadmapSection/>
       <FounderLetterSection />
-
       <Footer />
 
     </>

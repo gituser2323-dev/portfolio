@@ -13,7 +13,7 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 const courses = [
   {
     title: "GenAI Engineering",
-    badge: "Most In-Demand in 2027",
+    badge: "Most Demand in 2027",
     subtitle: "Generative AI • Agents • RAG • MCP",
     description:
       "Build AI applications, AI agents, LLM workflows, RAG systems and production-ready AI products used by modern startups and enterprises.",
@@ -428,8 +428,8 @@ function CourseRow({
           <h3
             className="
               mt-4
-              text-2xl
-              md:text-3xl
+              text-1xl
+              md:text-2xl
               font-black
               leading-none
             "

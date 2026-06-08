@@ -295,7 +295,7 @@ export default function Hero() {
     inline-flex
     items-center
     justify-center
-    w-full sm:w-auto
+ sm:w-auto
     border border-white/20
     hover:border-white/45
     px-8 py-3.5

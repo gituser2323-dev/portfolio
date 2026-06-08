@@ -209,7 +209,7 @@ export default function GenAIHeroo() {
               leading-[0.88]
             "
                         >
-                            Build
+                            Become A
                         </h1>
 
                         <span
@@ -225,7 +225,7 @@ export default function GenAIHeroo() {
               leading-[0.88]
             "
                         >
-                            Intelligent
+                           Full Stack AI
                         </span>
 
                         <span
@@ -240,7 +240,7 @@ export default function GenAIHeroo() {
               leading-[0.88]
             "
                         >
-                            Systems
+                            Engineer
                         </span>
                     </div>
 

@@ -143,7 +143,7 @@ export function Work() {
             Real-World Engineering Systems
             <br />
             <span className="text-white/40">
-              Powered by MERN + AI
+              Powered by Full Stack + AI
             </span>
           </h2>
 

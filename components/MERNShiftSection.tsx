@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export default function GenAIShiftSection() {
+export default function MERNFullStackAIEvolutionSection() {
   return (
     <section className="relative bg-black overflow-hidden py-32 md:py-40">
       {/* Soft Glow */}
@@ -34,7 +34,7 @@ export default function GenAIShiftSection() {
               text-white/40
             "
           >
-            The AI Shift
+            The Evolution
           </motion.div>
 
           <motion.h2
@@ -53,13 +53,13 @@ export default function GenAIShiftSection() {
             "
           >
             <span className="text-white">
-              AI is becoming
+              Software is becoming
             </span>
 
             <br />
 
             <span className="text-white/25">
-              infrastructure.
+              intelligent.
             </span>
           </motion.h2>
 
@@ -76,37 +76,44 @@ export default function GenAIShiftSection() {
               leading-relaxed
             "
           >
-            Just like websites, mobile apps and cloud
-            platforms transformed software, AI is becoming
-            a foundational layer of modern products.
+            Modern engineers are no longer just building
+            websites and APIs.
+
+            <br />
+            <br />
+
+            They're building products that think,
+            automate, reason and interact with users.
           </motion.p>
+
         </div>
 
-        {/* Timeline */}
+        {/* Evolution Timeline */}
+
         <div className="mt-28 border-t border-white/10 pt-20">
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
 
             {[
               {
-                year: "2000",
-                title: "Web",
-                desc: "Every business needed a website",
-              },
-              {
-                year: "2010",
-                title: "Mobile",
-                desc: "Every business needed an app",
+                year: "2015",
+                title: "Frontend",
+                desc: "Building interfaces users interact with",
               },
               {
                 year: "2020",
+                title: "Full Stack",
+                desc: "Owning both frontend and backend systems",
+              },
+              {
+                year: "2024",
                 title: "Cloud",
-                desc: "Every product moved online",
+                desc: "Deploying scalable applications globally",
               },
               {
                 year: "2027",
                 title: "AI",
-                desc: "Every workflow becomes intelligent",
+                desc: "Embedding intelligence into products",
               },
             ].map((item) => (
               <motion.div
@@ -131,9 +138,11 @@ export default function GenAIShiftSection() {
             ))}
 
           </div>
+
         </div>
 
         {/* Statement */}
+
         <div className="mt-32 border-t border-white/10 pt-24">
 
           <motion.div
@@ -151,25 +160,26 @@ export default function GenAIShiftSection() {
             "
           >
             <div className="text-white">
-              Understand AI.
+              Learn Development.
             </div>
 
             <div className="text-white/60 mt-3">
-              Build AI Products.
+              Build Products.
             </div>
 
             <div className="text-white/30 mt-3">
-              Deploy AI Systems.
+              Deploy Systems.
             </div>
 
             <div className="text-white mt-3">
-              Become an AI Engineer.
+              Integrate AI.
             </div>
           </motion.div>
 
         </div>
 
         {/* Vision */}
+
         <div className="mt-32">
 
           <div
@@ -197,7 +207,7 @@ export default function GenAIShiftSection() {
                 leading-tight
               "
             >
-              Not another prompt engineering course.
+              Not another coding bootcamp.
             </h3>
 
             <p
@@ -210,16 +220,21 @@ export default function GenAIShiftSection() {
                 leading-relaxed
               "
             >
-              Learn how modern AI systems are designed,
-              deployed and scaled using LLMs, Agents,
-              RAG, Vector Databases, LangGraph,
-              MCP and production infrastructure.
+              Learn how modern software products are
+              designed, developed, deployed and scaled.
 
               <br />
               <br />
 
-              Focus on building real-world AI products,
-              not just experimenting with prompts.
+              From React, Next.js and Node.js to
+              MongoDB, Cloud, DevOps and AI-powered
+              applications.
+
+              <br />
+              <br />
+
+              Build production-ready systems used by
+              modern startups and engineering teams.
             </p>
           </div>
 
