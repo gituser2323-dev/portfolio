@@ -39,6 +39,20 @@ const courses = [
     href: "/courses/mern-stack",
   },
 
+
+  {
+    title: "AWS Cloud Devops :) AI",
+    badge: "Most Popular",
+    subtitle: "AWS • Cloud• Cloud",
+    description:
+      "Build scalable SaaS products, modern web applications, APIs and cloud-deployed systems with AI integrations.",
+    outcomes: [
+      "Cloud Developer",
+      "Devops Engineer",
+    ],
+    href: "/courses/cloud-devops",
+  },
+
   {
     title: "Full Stack + AI",
     badge: "Enterprise Path",
