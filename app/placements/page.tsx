@@ -1,19 +1,17 @@
 import CourseCTA from "@/components/cta-banner";
-import PlacementCredibility from "@/components/PlacementCredibility";
-import PlacementHeroEditorial from "@/components/PlacementHero";
-import PlacementOutcomesSection from "@/components/PlacementOutcomesSection";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import PlacementSuccessCollage from "@/components/PlacementSuccessCollage";
 import TestimonialCollage from "@/components/TestimonialCollage";
 
 export default function page() {
   return (
     <>
-    <PlacementHeroEditorial/>
+    <Navbar/>
+    {/* <PlacementHeroEditorial/> */}
     <PlacementSuccessCollage/>
      <TestimonialCollage/>
-    <PlacementCredibility/>
-    <PlacementOutcomesSection/>
-    <CourseCTA/>
+    <Footer/>
     
     
     </>

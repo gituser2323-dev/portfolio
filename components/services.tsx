@@ -49,7 +49,7 @@ const courses = [
       "Cloud Architect",
       "Devops Engineer",
     ],
-    href: "/courses/cloud-devops",
+    href: "courses/cloud-devops",
   },
 
   {

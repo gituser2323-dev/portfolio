@@ -287,8 +287,8 @@ export default function Hero() {
                 </Link>
 
                 <Link
-                  href="https://www.speedupinfotech.com/placements"
-                  // href="#work"
+                  // href="/placements"
+                  href="#work"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="

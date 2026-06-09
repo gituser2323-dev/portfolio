@@ -98,13 +98,13 @@ export default function PlacementWallPremium() {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-[clamp(34px,5vw,90px)] font-medium leading-[1.1] tracking-tight max-w-4xl"
         >
-          <span className="text-red-500">450+</span> students placed
+          <span className="text-red-500">423+</span> students placed
           in real Enginnering roles.
         </motion.h2>
 
         {/* SOCIAL PROOF */}
         <div className="mt-6 flex flex-wrap gap-4 text-xs md:text-sm text-white/50">
-          <span>✓ Placed across 27+ companies</span>
+          <span>✓ Placed across 300+ companies</span>
           <span>✓ Avg package ₹5.2 LPA</span>
           <span>✓ Real hiring outcomes</span>
         </div>
